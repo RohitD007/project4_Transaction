@@ -1,9 +1,6 @@
 # project/tests/test_config.py
 """this test config"""
-import logging
-import os
 
-import app.config
 
 def test_development_config(application):
     """this test dev config"""
