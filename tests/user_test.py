@@ -1,9 +1,8 @@
 """Test file for user"""
 import logging
-import os
+
 # from faker import Faker
 from app import db
-from app import config
 from app.db.models import User, Song
 
 
@@ -44,29 +43,6 @@ def test_adding_user(application):
         db.session.delete(user)
         assert db.session.query(User).count() == 0
         assert db.session.query(Song).count() == 0
-
-
-def test_uploading_files(application, add_user):  # pylint: disable =unused-argument
-    """test for uploading files"""
-    log = logging.getLogger("myApp") # pylint: disable =unused-variable
-    with application.app_context():
-        assert db.session.query(User).count() == 1
-        assert db.session.query(Song).count() == 0
-
-    filecsv = 'music.csv'
-    flupload = config.Config.UPLOAD_FOLDER
-    upload_file = os.path.join(flupload, filecsv)
-    assert os.path.exists(upload_file) is True
-
-    with application.test_client() as client:
-        with open(upload_file, 'rb') as file:
-            data = {
-                'file': (file, filecsv),
-
-            }
-            resp = client.post('songs/upload', data=data, follow_redirects=True)
-
-    assert resp.status_code == 400
 
 
 def user_dashboard_access_approved(client):
