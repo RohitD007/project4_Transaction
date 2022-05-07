@@ -28,9 +28,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-<<<<<<< HEAD
-
-=======
           heroku_app_name: "rohit-project4-dev" #Must be unique in Heroku
           heroku_email: "rgd3@njit.edu"
 
